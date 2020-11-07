@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <name>biped2_description</name>
+  <version>0.0.0</version>
+  <description>The biped_description package</description>
+
+  <maintainer email="tclamai@connect.ust.hk">Tsz Chun Lam</maintainer>
+
+  <license>BSD</license>
+
+  <author email="tclamai@connect.ust.hk">Tsz Chun Lam</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <export>
+  </export>
+</package>

@@ -1,0 +1,25 @@
+biped2:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  group_joint_position_controller:
+    type: grp_pos_controller2/GrpPosController2
+    joints:
+      - left_abad_joint
+      - right_abad_joint 
+      - left_rear_joint
+      - left_rear_joint2
+      - right_rear_joint
+      - right_rear_joint2
+    left_abad_joint:
+      pid: {p: 500.0, i: 0.01, d: 10.0}
+    right_abad_joint:
+      pid: {p: 500.0, i: 0.01, d: 10.0}
+    left_rear_joint:
+      pid: {p: 50.0, i: 0.01, d: 1.0}
+    left_rear_joint2:
+      pid: {p: 50.0, i: 0.01, d: 0.1}
+    right_rear_joint:
+      pid: {p: 50.0, i: 0.01, d: 1.0}
+    right_rear_joint2:
+      pid: {p: 50.0, i: 0.01, d: 0.1}
