@@ -1,0 +1,9 @@
+<launch>
+  <rosparam file="$(find biped2_control)/config/grp_biped_controller2.yaml" command="load" />
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/biped2" args="group_joint_position_controller joint_state_controller" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/biped/joint_states" />
+  </node>
+
+</launch>

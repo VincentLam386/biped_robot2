@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<robot name="biped" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="space" value="0.003" />
+  <xacro:property name="mass_hip" value="50" />
+  <xacro:property name="width_hip" value="0.15" />
+  <xacro:property name="length_hip" value="0.3" />
+  <xacro:property name="height_hip" value="0.03" />
+  <xacro:property name="pos_hip" value="0.5" />
+
+  <xacro:property name="mass_abad" value="20" />
+  <xacro:property name="height_abad" value="0.018" />
+  <xacro:property name="radius_abad" value="0.07" />
+
+  <xacro:property name="width_abad" value="0.1" />
+  <xacro:property name="height_abad" value="0.01" />
+
+  <xacro:property name="mass_leg" value="25" />
+  <xacro:property name="width_leg" value="0.018" />
+  <xacro:property name="length_leg" value="0.018" />
+  <xacro:property name="height_rear_top" value="0.246" />
+  <xacro:property name="height_rear_bot" value="0.256" />
+
+  <xacro:property name="mass_tip" value="2" />
+  <xacro:property name="radius_tip" value="${length_leg/2}" />
+
+  <!--xacro:property name="len" value="100"/>
+  <xacro:property name="h" value="1"/>
+  <xacro:property name="h" value="-0.5"/-->
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find biped2_description)/urdf/biped.gazebo" />
+  
+  <link name="world"/>
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="hip"/>
+    <!--origin xyz="0 0 5" /-->
+  </joint>
+
+  <!-- Hip of the robot -->
+  <link name="hip">
+    <collision>
+      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_hip} ${width_hip} ${height_hip}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_hip} ${width_hip} ${height_hip}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <mass value="${mass_hip}"/>
+      <inertia
+        ixx="${mass_hip / 12.0 * (width_hip*width_hip + height_hip*height_hip)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_hip / 12.0 * (height_hip*height_hip + width_hip*width_hip)}" iyz="0.0"
+          izz="${mass_hip / 12.0 * (width_hip*width_hip + width_hip*width_hip)}" />
+    </inertial>
+  </link>
+
+  <!-- Left abad link -->
+
+  <joint name="left_abad_joint" type="continuous">
+    <parent link="hip"/>
+    <child link="leg_left_abad"/>
+    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <link name="leg_left_abad">
+    <collision>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width_abad} ${height_abad} ${width_abad}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width_abad} ${height_abad} ${width_abad}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <mass value="${mass_abad}"/>
+      <inertia
+        ixx="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" ixy="0.0" ixz="0.0"
+          iyy="${mass_abad*(width_abad*width_abad)/6}" iyz="0.0"
+          izz="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" />
+    </inertial>
+  </link>
+
+<!-- Left leg -->
+<!-- -->
+<!-- -->
+  <joint name="left_rear_joint" type="continuous">
+    <parent link="leg_left_abad"/>
+    <child link="leg_left_rear_top"/>
+    <!--origin xyz="0 ${width_hip/2+height_abad+width_leg/2+space} 0" rpy="0 -2.618 0"/-->
+    <origin xyz="0 ${width_hip/2+height_abad+width_leg/2+space} 0" rpy="0 3.1416 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- right rear top leg link -->
+  <link name="leg_left_rear_top">
+    <collision>
+      <origin xyz="0 ${width_leg/2+space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_top}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${width_leg/2+space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_top}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${width_leg/2+space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <mass value="${mass_leg}"/>
+      <inertia
+        ixx="${mass_leg / 12.0 * (width_leg*width_leg + height_rear_top*height_rear_top)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_leg / 12.0 * (height_rear_top*height_rear_top + width_leg*width_leg)}" iyz="0.0"
+          izz="${mass_leg / 12.0 * (width_leg*width_leg + width_leg*width_leg)}" />
+    </inertial>
+  </link>
+
+  <joint name="left_rear_joint2" type="continuous">
+    <parent link="leg_left_rear_top"/>
+    <child link="leg_left_rear_bot"/>
+    <!--origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
+    <origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- left rear bottom leg link -->
+  <link name="leg_left_rear_bot">
+    <collision>
+      <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_bot}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_bot}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <mass value="${mass_leg}"/>
+      <inertia
+        ixx="${mass_leg / 12.0 * (width_leg*width_leg + height_rear_bot*height_rear_bot)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_leg / 12.0 * (height_rear_bot*height_rear_bot + width_leg*width_leg)}" iyz="0.0"
+          izz="${mass_leg / 12.0 * (width_leg*width_leg + width_leg*width_leg)}" />
+    </inertial>
+  </link>
+
+  <joint name="left_end_joint" type="fixed">
+    <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot-width_leg}" rpy="0 0 0" />
+    <parent link="leg_left_rear_bot" />
+    <child link="left_end_tip" />
+  </joint>
+  
+  <link name="left_end_tip">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${radius_tip}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	      <sphere radius="${radius_tip}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${mass_tip}"/>
+      <inertia
+        ixx="0.0" ixy="0.0" ixz="0.0"
+          iyy="0.0" iyz="0.0"
+          izz="0.0" />
+    </inertial>
+  </link>
+  
+
+<!-- Right leg -->
+<!-- -->
+<!-- -->
+  <!-- Right abad link -->
+
+  <joint name="right_abad_joint" type="continuous">
+    <parent link="hip"/>
+    <child link="leg_right_abad"/>
+    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <link name="leg_right_abad">
+    <collision>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width_abad} ${height_abad} ${width_abad}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${width_abad} ${height_abad} ${width_abad}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <mass value="${mass_abad}"/>
+      <inertia
+        ixx="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" ixy="0.0" ixz="0.0"
+          iyy="${mass_abad*(width_abad*width_abad)/6}" iyz="0.0"
+          izz="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" />
+    </inertial>
+  </link>
+
+  <joint name="right_rear_joint" type="continuous">
+    <parent link="leg_right_abad"/>
+    <child link="leg_right_rear_top"/>
+    <!--origin xyz="0 ${-width_hip/2-height_abad-width_leg/2-space} 0" rpy="0 -2.618 0"/-->
+    <origin xyz="0 ${-width_hip/2-height_abad-width_leg/2-space} 0" rpy="0 3.1416 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- right rear top leg link -->
+  <link name="leg_right_rear_top">
+    <collision>
+      <origin xyz="0 ${-width_leg/2-space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_top}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${-width_leg/2-space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_top}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${-width_leg/2-space} ${height_rear_top/2-width_leg}" rpy="0 0 0"/>
+      <mass value="${mass_leg}"/>
+      <inertia
+        ixx="${mass_leg / 12.0 * (width_leg*width_leg + height_rear_top*height_rear_top)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_leg / 12.0 * (height_rear_top*height_rear_top + width_leg*width_leg)}" iyz="0.0"
+          izz="${mass_leg / 12.0 * (width_leg*width_leg + width_leg*width_leg)}" />
+    </inertial>
+  </link>
+
+  <joint name="right_rear_joint2" type="continuous">
+    <parent link="leg_right_rear_top"/>
+    <child link="leg_right_rear_bot"/>
+    <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
+    <origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <!-- right rear bottom leg link -->
+  <link name="leg_right_rear_bot">
+    <collision>
+      <origin xyz="0 ${width_leg/2-space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_bot}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 ${width_leg/2-space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${length_leg} ${width_leg} ${height_rear_bot}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 ${width_leg/2-space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
+      <mass value="${mass_leg}"/>
+      <inertia
+        ixx="${mass_leg / 12.0 * (width_leg*width_leg + height_rear_bot*height_rear_bot)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_leg / 12.0 * (height_rear_bot*height_rear_bot + width_leg*width_leg)}" iyz="0.0"
+          izz="${mass_leg / 12.0 * (width_leg*width_leg + width_leg*width_leg)}" />
+    </inertial>
+  </link>
+
+  <joint name="right_end_joint" type="fixed">
+    <origin xyz="0 ${width_leg/2-space} ${height_rear_bot-width_leg}" rpy="0 0 0" />
+    <parent link="leg_right_rear_bot" />
+    <child link="right_end_tip" />
+  </joint>
+
+  <link name="right_end_tip">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="${radius_tip}"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+	      <sphere radius="${radius_tip}"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${mass_tip}"/>
+      <inertia
+        ixx="0.0" ixy="0.0" ixz="0.0"
+          iyy="0.0" iyz="0.0"
+          izz="0.0" />
+    </inertial>
+  </link>
+
+  <!-- Define transmission -->
+  <transmission name="left_abad">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_abad_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_abad_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_rear2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_rear_joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_rear_motor2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="left_rear">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_rear_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="left_rear_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_abad">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_abad_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_abad_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_rear2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_rear_joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_rear_motor2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="right_rear">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_rear_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="right_rear_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+</robot>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot name="ground" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="len" value="100"/>
+  <xacro:property name="h" value="1"/>
+  <xacro:property name="h_dep" value="-0.5" />
+  <xacro:property name="i" value="500.0" />
+  <xacro:property name="mass" value="2500.0" />
+
+  <!-- Define ground -->
+  <link name="world"/>
+  <joint name="fixed_ground" type="fixed">
+    <parent link="world"/>
+    <child link="ground"/>
+  </joint>
+
+  <link name="ground">
+    <collision>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${len} ${len} ${h}" rpy="0 0 0"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${len} ${len} ${h}" rpy="0 0 0"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <mass value="${mass}"/>
+      <inertia
+        ixx="${i}" ixy="${i}" ixz="${i}"
+	iyy="${i}" iyz="${i}"
+	izz="${i}" />
+    </inertial>
+
+  </link>
+
+
+
+</robot>
