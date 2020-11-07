@@ -12,14 +12,14 @@ biped2:
       - right_rear_joint
       - right_rear_joint2
     left_abad_joint:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 500.0, i: 0.01, d: 10.0}
     right_abad_joint:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 500.0, i: 0.01, d: 10.0}
     left_rear_joint:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 50.0, i: 0.01, d: 1.0}
     left_rear_joint2:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 50.0, i: 0.01, d: 0.1}
     right_rear_joint:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 50.0, i: 0.01, d: 1.0}
     right_rear_joint2:
-      pid: {p: 100.0, i: 0.01, d: 10.0}
+      pid: {p: 50.0, i: 0.01, d: 0.1}
