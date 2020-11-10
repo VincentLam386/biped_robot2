@@ -5,8 +5,8 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/biped2</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      <!--robotSimType>biped2_sim_hardware/BipedSimHW</robotSimType-->
+      <!--robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType-->
+      <robotSimType>biped2_sim_hardware/BipedHWSim</robotSimType>
     </plugin>
   </gazebo>
 

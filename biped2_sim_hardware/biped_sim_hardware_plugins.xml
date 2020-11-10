@@ -1,5 +1,5 @@
-<library path="lib/libbiped2_hw_sim_lib">\
-  <class name="biped2_sim_hardware/BipedSimHW"
-	 type="biped2_sim_hw_ns::BipedSimHW"
-         base_class_type="gazebo_ros_control::DefaultRobotHWSim" />
+<library path="lib/libbiped2_sim_hardware">
+  <class name="biped2_sim_hardware/BipedHWSim"
+	 type="biped2_sim_hw_ns::BipedHWSim"
+         base_class_type="gazebo_ros_control::RobotHWSim" />
 </library>
