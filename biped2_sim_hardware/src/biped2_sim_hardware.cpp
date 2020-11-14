@@ -62,87 +62,95 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-#ifndef _GAZEBO_ROS_CONTROL___BIPED_HW_SIM_H_
-#define _GAZEBO_ROS_CONTROL___BIPED_HW_SIM_H_
-
-// ros_control
-#include <control_toolbox/pid.h>
-#include <hardware_interface/joint_command_interface.h>
-#include <hardware_interface/imu_sensor_interface.h>
-#include <hardware_interface/robot_hw.h>
-#include <joint_limits_interface/joint_limits.h>
-#include <joint_limits_interface/joint_limits_interface.h>
-#include <joint_limits_interface/joint_limits_rosparam.h>
-#include <joint_limits_interface/joint_limits_urdf.h>
-
-// Gazebo
-#include <gazebo/common/common.hh>
-#include <gazebo/physics/physics.hh>
-#include <gazebo/gazebo.hh>
+/* Author: Dave Coleman, Jonathan Bohren
+   Desc:   Hardware Interface for any simulated robot in Gazebo
+*/
 
 
-// ROS
-#include <ros/ros.h>
-#include <angles/angles.h>
-#include <pluginlib/class_list_macros.h>
-
-
-// gazebo_ros_control
-#include <gazebo_ros_control/default_robot_hw_sim.h>
-
-// URDF
-#include <urdf/model.h>
-
-
-
-
+#include <biped2_sim_hardware/biped2_sim_hardware.h>
 
 namespace biped2_sim_hw_ns
 {
 
-class BipedHWSim: public gazebo_ros_control::DefaultRobotHWSim
+
+bool BipedHWSim::initSim(
+  const std::string& robot_namespace,
+  ros::NodeHandle model_nh,
+  gazebo::physics::ModelPtr parent_model,
+  const urdf::Model *const urdf_model,
+  std::vector<transmission_interface::TransmissionInfo> transmissions)
 {
-public:
+  // Call parent init (dealing with joint interfaces)
+  if (!DefaultRobotHWSim::initSim(robot_namespace, model_nh, parent_model, urdf_model, transmissions)){
+    return false;
+  }
 
-    virtual bool initSim(
-    const std::string& robot_namespace,
-    ros::NodeHandle model_nh,
-    gazebo::physics::ModelPtr parent_model,
-    const urdf::Model *const urdf_model,
-    std::vector<transmission_interface::TransmissionInfo> transmissions);
+  /** register sensors */
+  // IMU
+  imu_data.name = "hip_imu";
+  imu_data.frame_id = "hip";
+  imu_data.orientation = imu_orientation;
+  imu_data.angular_velocity = imu_angular_velocity;
+  imu_data.linear_acceleration = imu_linear_acceleration;
+  hardware_interface::ImuSensorHandle imu_sensor_handle(imu_data);
+  imu_interface_.registerHandle(imu_sensor_handle);
+  registerInterface(&imu_interface_);
 
-    virtual void readSim(ros::Time time, ros::Duration period);
+  world_ = parent_model->GetWorld();
+  imu_link_ = parent_model->GetLink(imu_data.frame_id);
 
-protected:
-
-  hardware_interface::ImuSensorInterface imu_interface_;
-
-  // IMU related members
-  hardware_interface::ImuSensorHandle::Data imu_data;
-  double imu_orientation[4];
-  double imu_angular_velocity[3];
-  double imu_linear_acceleration[3];
-  gazebo::physics::WorldPtr world_;
-  gazebo::physics::LinkPtr imu_link_;
-
-  /// \brief save current body/physics state
-  ignition::math::Quaternion<double> orientation;
-  ignition::math::Vector3<double> velocity;
-  ignition::math::Vector3<double> accel;
-  ignition::math::Vector3<double> rate;
-  ignition::math::Vector3<double> gravity;
+  return true;
+}
 
 
+void BipedHWSim::readSim(ros::Time time, ros::Duration period)
+{
+  DefaultRobotHWSim::readSim(time, period);
+  
+  double dt = period.toSec();
 
-  /// \brief allow specifying constant xyz and rpy offsets
-  ignition::math::Pose3<double> offset_;
+   // Get Pose/Orientation
+  ignition::math::Pose3<double> pose = imu_link_->WorldCoGPose();
+  ignition::math::Quaternion<double> rot = this->offset_.Rot()*pose.Rot();
+  rot.Normalize();
 
-};
+  // get Gravity
+  gravity = world_->Gravity();
+  double gravity_length = gravity.Length();
+  ROS_DEBUG_NAMED("gazebo_ros_imu", "gravity_world = [%g %g %g]", gravity.X(), gravity.Y(), gravity.Z());
 
-typedef boost::shared_ptr<BipedHWSim> BipedHWSimPtr;
+  // get Acceleration and Angular Rates
+  // the result of GetRelativeLinearAccel() seems to be unreliable (sum of forces added during the current simulation step)?
+  //accel = myBody->GetRelativeLinearAccel(); // get acceleration in body frame
+  ignition::math::Vector3<double> temp = imu_link_->WorldCoGLinearVel(); // get velocity in world frame
+  if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt - gravity);
+  velocity = temp;
+
+  // calculate angular velocity from delta quaternion
+  // note: link->GetRelativeAngularVel() sometimes return nan?
+  // rate  = link->GetRelativeAngularVel(); // get angular rate in body frame
+  ignition::math::Quaternion<double> delta = this->orientation.Inverse() * rot;
+  this->orientation = rot;
+  if (dt > 0.0) {
+    rate = 2.0 * acos(std::max(std::min(delta.W(), 1.0), -1.0)) * ignition::math::Vector3<double>(delta.X(), delta.Y(), delta.Z()).Normalize() / dt;
+  }
+
+  imu_orientation[0] = rot.X();
+  imu_orientation[1] = rot.Y();
+  imu_orientation[2] = rot.Z();
+  imu_orientation[3] = rot.W();
+
+  imu_angular_velocity[0] = rate.X();
+  imu_angular_velocity[1] = rate.Y();
+  imu_angular_velocity[2] = rate.Z();
+
+  imu_linear_acceleration[0] = accel.X();
+  imu_linear_acceleration[1] = accel.Y();
+  imu_linear_acceleration[2] = accel.Z();
 
 }
 
-#endif // #ifndef _GAZEBO_ROS_CONTROL___BIPED_HW_SIM_H_
 
+}
 
+PLUGINLIB_EXPORT_CLASS(biped2_sim_hw_ns::BipedHWSim, gazebo_ros_control::RobotHWSim)
