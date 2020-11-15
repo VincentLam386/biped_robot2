@@ -36,7 +36,7 @@
   <xacro:include filename="$(find biped2_description)/urdf/biped.gazebo" />
   
   <link name="world"/>
-  <joint name="fixed" type="floating">
+  <joint name="fixed" type="fixed">
     <parent link="world"/>
     <child link="hip"/>
     <!--origin xyz="0 0 5" /-->
