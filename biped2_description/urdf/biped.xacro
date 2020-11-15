@@ -36,7 +36,7 @@
   <xacro:include filename="$(find biped2_description)/urdf/biped.gazebo" />
   
   <link name="world"/>
-  <joint name="fixed" type="fixed">
+  <joint name="fixed" type="floating">
     <parent link="world"/>
     <child link="hip"/>
     <!--origin xyz="0 0 5" /-->
@@ -243,7 +243,7 @@
     </inertial>
   </link>
 
-  <joint name="left_end_joint" type="fixed">
+  <joint name="left_end_joint" type="continuous">
     <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot-width_leg}" rpy="0 0 0" />
     <parent link="leg_left_rear_bot" />
     <child link="left_end_tip" />
@@ -393,12 +393,12 @@
 
   <!-- right front bottom leg link -->
   <link name="leg_right_front_bot">
-    <collision>
+    <!--collision>
       <origin xyz="0 ${-width_leg/2-space} ${height_front_bot/2-width_leg}" rpy="0 0 0"/>
       <geometry>
         <box size="${length_leg} ${width_leg} ${height_front_bot}"/>
       </geometry>
-    </collision>
+    </collision-->
     <visual>
       <origin xyz="0 ${-width_leg/2-space} ${height_front_bot/2-width_leg}" rpy="0 0 0"/>
       <geometry>
