@@ -36,10 +36,16 @@
   <xacro:include filename="$(find biped2_description)/urdf/biped.gazebo" />
   
   <link name="world"/>
-  <joint name="fixed" type="fixed">
+  <!--joint name="fixed" type="floating">
     <parent link="world"/>
     <child link="hip"/>
-    <!--origin xyz="0 0 5" /-->
+  </joint-->
+  <joint name="prism" type="prismatic">
+    <parent link="world"/>
+    <child link="hip"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-0.5" upper="1.5" velocity="10.0"/>
   </joint>
 
   <!-- Hip of the robot -->
