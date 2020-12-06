@@ -24,6 +24,7 @@
   <xacro:property name="height_front_bot" value="0.26" />
   <xacro:property name="height_rear_top" value="0.26" />
   <xacro:property name="height_rear_bot" value="0.26" />
+  <xacro:property name="joint_effot" value="50.0"/>
 
   <xacro:property name="mass_tip" value="0.01" />
   <xacro:property name="radius_tip" value="${length_leg/2}" />
@@ -36,10 +37,12 @@
   <xacro:include filename="$(find biped2_description)/urdf/biped.gazebo" />
   
   <link name="world"/>
-  <joint name="fixed" type="floating">
+
+  <!--joint name="fixed" type="fixed">
     <parent link="world"/>
     <child link="hip"/>
-  </joint>
+    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+  </joint-->
   <!--joint name="prism" type="prismatic">
     <parent link="world"/>
     <child link="hip"/>
@@ -47,23 +50,75 @@
     <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-0.5" upper="1.5" velocity="10.0"/>
   </joint-->
-  <!--joint name="plan" type="planar">
+
+  <!-- Planar joint -->
+  <joint name="planx" type="prismatic">
     <parent link="world"/>
+    <child link="x-prism"/>
+    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-10.0" upper="50.0" velocity="10.0"/>
+  </joint>
+  <link name="x-prism">
+    <visual>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
+      <geometry>
+        <box size="${0.01} ${0.01} ${0.01}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0.005" rpy="0 0 0"/>
+      <mass value="${1}"/>
+      <inertia
+        ixx="${mass_hip / 12.0 * (0.0001 + 0.0001)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_hip / 12.0 * (0.0001 + 0.0001)}" iyz="0.0"
+          izz="${mass_hip / 12.0 * (0.0001 + 0.0001)}" />
+    </inertial>
+  </link>
+  <joint name="planz" type="prismatic">
+    <parent link="x-prism"/>
     <child link="hip"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <limit effort="1000.0" lower="-10.0" upper="50.0" velocity="10.0"/>
+  </joint>
+  <!--link name="z-prism">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="${0.01} ${0.01} ${0.01}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${0.001}"/>
+      <inertia
+        ixx="${mass_hip / 12.0 * (0.0001 + 0.0001)}" ixy="0.0" ixz="0.0"
+          iyy="${mass_hip / 12.0 * (0.0001 + 0.0001)}" iyz="0.0"
+	  izz="${mass_hip / 12.0 * (0.0001 + 0.0001)}" />
+    </inertial>
+  </link>
+  <joint name="rev" type="continuous">
+    <parent link="z-prism"/>
+    <child link="hip"/>
+    <axis xyz="0 1 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint-->
+  <!-- End planar joint -->
 
   <!-- Hip of the robot -->
   <link name="hip">
     <collision>
-      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_hip} ${width_hip} ${height_hip}"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_hip} ${width_hip} ${height_hip}"/>
       </geometry>
@@ -71,7 +126,7 @@
     </visual>
 
     <inertial>
-      <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="${mass_hip}"/>
       <inertia
         ixx="${mass_hip / 12.0 * (width_hip*width_hip + height_hip*height_hip)}" ixy="0.0" ixz="0.0"
@@ -82,12 +137,13 @@
 
   <!-- Left abad link -->
 
-  <joint name="left_abad_joint" type="continuous">
+  <joint name="left_abad_joint" type="revolute">
     <parent link="hip"/>
     <child link="leg_left_abad"/>
-    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-0.5236" upper="0.5236" velocity="10.0"/>
   </joint>
 
   <link name="leg_left_abad">
@@ -118,21 +174,23 @@
 <!-- Left leg -->
 <!-- -->
 <!-- -->
-  <joint name="left_front_joint" type="continuous">
+  <joint name="left_front_joint" type="revolute">
     <parent link="leg_left_abad"/>
     <child link="leg_left_front_top"/>
     <origin xyz="0 ${width_hip/2+height_abad+space} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
-  <joint name="left_rear_joint" type="continuous">
+  <joint name="left_rear_joint" type="revolute">
     <parent link="leg_left_abad"/>
     <child link="leg_left_rear_top"/>
     <!--origin xyz="0 ${width_hip/2+height_abad+width_leg/2+space} 0" rpy="0 -2.618 0"/-->
     <origin xyz="0 ${width_hip/2+height_abad+width_leg+space*2} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- Left front top leg link -->
@@ -187,12 +245,13 @@
     </inertial>
   </link>
 
-  <joint name="left_front_joint2" type="continuous">
+  <joint name="left_front_joint2" type="revolute">
     <parent link="leg_left_front_top"/>
     <child link="leg_left_front_bot"/>
     <origin xyz="0 ${width_leg+space} ${height_front_top-width_leg}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- left front bottom leg link -->
@@ -220,13 +279,14 @@
     </inertial>
   </link>
 
-  <joint name="left_rear_joint2" type="continuous">
+  <joint name="left_rear_joint2" type="revolute">
     <parent link="leg_left_rear_top"/>
     <child link="leg_left_rear_bot"/>
     <!--origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
     <origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- left rear bottom leg link -->
@@ -291,12 +351,13 @@
 <!-- -->
   <!-- Right abad link -->
 
-  <joint name="right_abad_joint" type="continuous">
+  <joint name="right_abad_joint" type="revolute">
     <parent link="hip"/>
     <child link="leg_right_abad"/>
-    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-0.5236" upper="0.5236" velocity="10.0"/>
   </joint>
 
   <link name="leg_right_abad">
@@ -324,22 +385,24 @@
     </inertial>
   </link>
 
-  <joint name="right_front_joint" type="continuous">
+  <joint name="right_front_joint" type="revolute">
     <parent link="leg_right_abad"/>
     <child link="leg_right_front_top"/>
     <origin xyz="0 ${-width_hip/2-height_abad-space} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
 
-  <joint name="right_rear_joint" type="continuous">
+  <joint name="right_rear_joint" type="revolute">
     <parent link="leg_right_abad"/>
     <child link="leg_right_rear_top"/>
     <!--origin xyz="0 ${-width_hip/2-height_abad-width_leg/2-space} 0" rpy="0 -2.618 0"/-->
     <origin xyz="0 ${-width_hip/2-height_abad-width_leg-space*2} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- Right front top leg link -->
@@ -395,12 +458,13 @@
     </inertial>
   </link>
 
-  <joint name="right_front_joint2" type="continuous">
+  <joint name="right_front_joint2" type="revolute">
     <parent link="leg_right_front_top"/>
     <child link="leg_right_front_bot"/>
     <origin xyz="0 ${-width_leg-space} ${height_front_top-width_leg}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- right front bottom leg link -->
@@ -429,13 +493,14 @@
   </link>
 
 
-  <joint name="right_rear_joint2" type="continuous">
+  <joint name="right_rear_joint2" type="revolute">
     <parent link="leg_right_rear_top"/>
     <child link="leg_right_rear_bot"/>
     <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
     <origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
+    <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10.0"/>
   </joint>
 
   <!-- right rear bottom leg link -->
