@@ -1,0 +1,39 @@
+<launch>
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find biped2_gazebo)/worlds/biped.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="true"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+ 
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find biped2_description)/urdf/biped.xacro" />
+
+  <param name="robot_ground" command="$(find xacro)/xacro $(find biped2_description)/urdf/ground.xacro" />
+
+  <param name="robot_ball" command="$(find xacro)/xacro $(find biped2_description)/urdf/ball.xacro" />
+
+  <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -unpause -urdf -model biped" />
+  <node name="spawn_urdf_ground" pkg="gazebo_ros" type="spawn_model" args="-param robot_ground -unpause -urdf -model ground" />
+  <node name="spawn_urdf_ball" pkg="gazebo_ros" type="spawn_model" args="-param robot_ball -unpause -urdf -model ball" />
+
+  <!-- biped control -->
+  <rosparam file="$(find biped2_control)/config/grp_biped_controller2.yaml" command="load" />
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/biped2" args="group_joint_position_controller joint_state_controller" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/biped/joint_states" />
+  </node>
+
+  
+</launch>
