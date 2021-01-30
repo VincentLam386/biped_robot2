@@ -10,6 +10,9 @@
   </gazebo>
 
   <gazebo reference="ground">
+    <selfCollide>true</selfCollide>   
+    <mu1>Inf</mu1>
+    <mu2>Inf</mu2>
     <material>Gazebo/Grey</material>
   </gazebo>
 
