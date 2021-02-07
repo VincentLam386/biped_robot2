@@ -121,10 +121,14 @@ void BipedHWSim::readSim(ros::Time time, ros::Duration period)
 
   // get Acceleration and Angular Rates
   // the result of GetRelativeLinearAccel() seems to be unreliable (sum of forces added during the current simulation step)?
-  //accel = myBody->GetRelativeLinearAccel(); // get acceleration in body frame
+  //accel = imu_link_->RelativeLinearAccel(); // get acceleration in body frame
+  //accel = imu_link_->WorldCoGLinearAcccel();
   ignition::math::Vector3<double> temp = imu_link_->WorldCoGLinearVel(); // get velocity in world frame
-  if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt - gravity);
+  //std::cout << imu_link_->RelativeLinearVel() << " " << imu_link_->WorldLinearVel() << " " << imu_link_->WorldCoGLinearVel() << "\n";
+  //if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt - gravity);
+  if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt);
   velocity = temp;
+  std::cout << velocity << std::endl;
 
   // calculate angular velocity from delta quaternion
   // note: link->GetRelativeAngularVel() sometimes return nan?

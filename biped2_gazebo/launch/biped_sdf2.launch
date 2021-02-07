@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <launch>
-    <include file="$(find biped2_gazebo)/launch/biped_sdf.launch">
+    <include file="$(find biped3_gazebo)/launch/biped_sdf.launch">
       <arg name="robot_name" value="closed_chain"/>
       <arg name="x" value="0.0" />
       <arg name="y" value="0.0" />
-      <arg name="z" value="1.0"/>
-      <arg name="sdf_robot_file" value="$(find biped2_description)/urdf/biped.sdf" />
+      <arg name="z" value="0.0"/>
+      <arg name="sdf_robot_file" value="$(find biped3_description)/urdf/biped.sdf" />
     </include>
  
     <!-- Load the URDF into the ROS Parameter Server -->
-    <param name="robot_description" command="$(find xacro)/xacro $(find biped2_description)/urdf/biped.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find biped3_description)/urdf/biped.xacro" />
 
-    <param name="robot_ground" command="$(find xacro)/xacro $(find biped2_description)/urdf/ground.xacro" />
+    <!--param name="test_ball" command="$(find xacro)/xacro $(find biped3_description)/urdf/ball.xacro" /-->
 
     <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
-    <node name="spawn_urdf_ground" pkg="gazebo_ros" type="spawn_model" args="-param robot_ground -urdf -model ground" />
+    <!--node name="spawn_urdf_ball" pkg="gazebo_ros" type="spawn_model" args="-param test_ball -urdf -model ball" /-->
+    <!--param name="ball_sdf" textfile="$(find biped3_description)/urdf/ball.sdf" />
+    
+    <node name="spawn_model2" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+      args="-sdf -x  0 -y 0 -z 0 -model ball -param ball_sdf"/-->
 
     <!-- biped control -->
-    <rosparam file="$(find biped2_control)/config/grp_biped_controller2.yaml" command="load" />
+    <rosparam file="$(find biped3_control)/config/grp_biped_controller3.yaml" command="load" />
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/biped2" args="group_joint_position_controller joint_state_controller" />
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-      <remap from="/joint_states" to="/biped2/joint_states" />
+      <remap from="/joint_states" to="/biped/joint_states" />
     </node>
+
   
   </launch>

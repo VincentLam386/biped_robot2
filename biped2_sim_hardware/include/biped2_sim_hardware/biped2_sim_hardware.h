@@ -129,6 +129,7 @@ protected:
   ignition::math::Quaternion<double> orientation;
   ignition::math::Vector3<double> velocity;
   ignition::math::Vector3<double> accel;
+  //ignition::math::Vector3<double> accel2;
   ignition::math::Vector3<double> rate;
   ignition::math::Vector3<double> gravity;
 
