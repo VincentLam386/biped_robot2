@@ -377,12 +377,12 @@
 
   <!-- Left rear bottom leg link -->
   <link name="leg_left_rear_bot">
-    <collision>
+    <!--collision>
       <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
       <geometry>
         <box size="${length_leg} ${width_leg} ${height_rear_bot}"/>
       </geometry>
-    </collision>
+    </collision-->
     <visual>
       <origin xyz="0 ${-width_leg/2+space} ${height_rear_bot/2-width_leg}" rpy="0 0 0"/>
       <geometry>
