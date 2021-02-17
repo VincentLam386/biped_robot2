@@ -45,21 +45,21 @@
       <pose frame=''>0 0 0.5 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
-        <mass>2</mass>
+        <mass>2.7</mass>
         <inertia>
-          <ixx>0.0039</ixx>
+          <ixx>0.01845</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0039</iyy>
+          <iyy>0.0237656</iyy>
           <iyz>0</iyz>
-          <izz>0.0075</izz>
+          <izz>0.00693562</izz>
         </inertia>
       </inertial>
       <collision name='hip_collision'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.15 0.03</size>
+            <size>0.165 0.06 0.28</size>
           </box>
         </geometry>
         <surface>
@@ -75,7 +75,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.15 0.03</size>
+            <size>0.165 0.06 0.28</size>
           </box>
         </geometry>
         <material>
@@ -109,22 +109,22 @@
     <link name='leg_left_abad'>
       <pose frame=''>0 0 0.5 0 -0 0</pose>
       <inertial>
-        <pose frame=''>0 0.08 0 0 -0 0</pose>
+        <pose frame=''>0 0.075 0 0 -0 0</pose>
         <mass>2</mass>
         <inertia>
           <ixx>0.00168333</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0166667</iyy>
+          <iyy>0.0156833</iyy>
           <iyz>0</iyz>
-          <izz>0.0150167</izz>
+          <izz>0.0140333</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_abad_collision'>
-        <pose frame=''>0 0.08 0 0 -0 0</pose>
+        <pose frame=''>0 0.075 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.01 0.1</size>
+            <size>0.29 0.01 0.1</size>
           </box>
         </geometry>
         <surface>
@@ -140,10 +140,10 @@
         </surface>
       </collision>
       <visual name='leg_left_abad_visual'>
-        <pose frame=''>0 0.08 0 0 -0 0</pose>
+        <pose frame=''>0 0.075 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.01 0.1</size>
+            <size>0.29 0.01 0.1</size>
           </box>
         </geometry>
         <material>
@@ -178,7 +178,7 @@
       </axis>
     </joint>
     <link name='leg_left_spring_rear'>
-      <pose frame=''>0 0.095 0.5 0 0.196 0</pose>
+      <pose frame=''>0 0.09 0.5 0 0.196 0</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -245,7 +245,7 @@
       </axis>
     </joint>
     <link name='leg_left_rear_top'>
-      <pose frame=''>0 0.123 0.5 3.14159 -0.196007 -3.14159</pose>
+      <pose frame=''>0 0.118 0.5 3.14159 -0.196007 -3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -316,7 +316,7 @@
       </axis>
     </joint>
     <link name='leg_left_rear_bot'>
-      <pose frame=''>-0.047131 0.123 0.262634 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-0.047131 0.118 0.262634 3.14159 0.196993 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -368,7 +368,7 @@
       </axis>
     </joint>
     <link name='leg_left_front_bot'>
-      <pose frame=''>-0.015032 0.123 0.101806 0 0.1956 0</pose>
+      <pose frame=''>-0.015032 0.118 0.101806 0 0.1956 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -418,7 +418,7 @@
       </axis>
     </joint>
     <link name='leg_left_front_top'>
-      <pose frame=''>0.032002 0.105 0.339191 0 -0.1964 0</pose>
+      <pose frame=''>0.032002 0.1 0.339191 0 -0.1964 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.082 0 -0 0</pose>
         <mass>0.1</mass>
@@ -489,7 +489,7 @@
       </axis>
     </joint>
     <link name='leg_left_spring_front'>
-      <pose frame=''>-1e-06 0.085 0.500038 3.14159 0.196393 3.14159</pose>
+      <pose frame=''>-1e-06 0.08 0.500038 3.14159 0.196393 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -560,7 +560,7 @@
       </axis>
     </joint>
     <link name='left_end_tip'>
-      <pose frame=''>0.000234 0.114 0.025314 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>0.000234 0.109 0.025314 3.14159 0.196993 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
         <mass>0.025</mass>
@@ -568,9 +568,9 @@
           <ixx>2.15083e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>2.15083e-05</iyy>
+          <iyy>2.10021e-05</iyy>
           <iyz>0</iyz>
-          <izz>1.35e-06</izz>
+          <izz>8.4375e-07</izz>
         </inertia>
       </inertial>
       <collision name='left_end_tip_collision'>
@@ -629,22 +629,22 @@
     <link name='leg_right_abad'>
       <pose frame=''>0 0 0.5 0 -0 0</pose>
       <inertial>
-        <pose frame=''>0 -0.08 0 0 -0 0</pose>
+        <pose frame=''>0 -0.075 0 0 -0 0</pose>
         <mass>2</mass>
         <inertia>
           <ixx>0.00168333</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0166667</iyy>
+          <iyy>0.0156833</iyy>
           <iyz>0</iyz>
-          <izz>0.0150167</izz>
+          <izz>0.0140333</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_abad_collision'>
-        <pose frame=''>0 -0.08 0 0 -0 0</pose>
+        <pose frame=''>0 -0.075 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.01 0.1</size>
+            <size>0.29 0.01 0.1</size>
           </box>
         </geometry>
         <surface>
@@ -660,10 +660,10 @@
         </surface>
       </collision>
       <visual name='leg_right_abad_visual'>
-        <pose frame=''>0 -0.08 0 0 -0 0</pose>
+        <pose frame=''>0 -0.075 0 0 -0 0</pose>
         <geometry>
           <box>
-            <size>0.3 0.01 0.1</size>
+            <size>0.29 0.01 0.1</size>
           </box>
         </geometry>
         <material>
@@ -698,7 +698,7 @@
       </axis>
     </joint>
     <link name='leg_right_spring_rear'>
-      <pose frame=''>0 -0.095 0.5 0 0.196 0</pose>
+      <pose frame=''>0 -0.09 0.5 0 0.196 0</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -745,7 +745,7 @@
       </axis>
     </joint>
     <link name='leg_right_rear_top'>
-      <pose frame=''>0 -0.123 0.5 3.14159 -0.196007 -3.14159</pose>
+      <pose frame=''>0 -0.118 0.5 3.14159 -0.196007 -3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -816,7 +816,7 @@
       </axis>
     </joint>
     <link name='leg_right_rear_bot'>
-      <pose frame=''>-0.047131 -0.123 0.262634 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-0.047131 -0.118 0.262634 3.14159 0.196993 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -868,7 +868,7 @@
       </axis>
     </joint>
     <link name='leg_right_front_bot'>
-      <pose frame=''>-0.015032 -0.123 0.101806 0 0.1956 0</pose>
+      <pose frame=''>-0.015032 -0.118 0.101806 0 0.1956 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
         <mass>0.1</mass>
@@ -918,7 +918,7 @@
       </axis>
     </joint>
     <link name='leg_right_front_top'>
-      <pose frame=''>0.032002 -0.105 0.339191 0 -0.1964 0</pose>
+      <pose frame=''>0.032002 -0.1 0.339191 0 -0.1964 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.082 0 -0 0</pose>
         <mass>0.1</mass>
@@ -989,7 +989,7 @@
       </axis>
     </joint>
     <link name='leg_right_spring_front'>
-      <pose frame=''>-1e-06 -0.085 0.500038 3.14159 0.196393 3.14159</pose>
+      <pose frame=''>-1e-06 -0.08 0.500038 3.14159 0.196393 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -1040,7 +1040,7 @@
       </axis>
     </joint>
     <link name='right_end_tip'>
-      <pose frame=''>0.000234 -0.114 0.025314 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>0.000234 -0.109 0.025314 3.14159 0.196993 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
         <mass>0.025</mass>
@@ -1048,9 +1048,9 @@
           <ixx>2.15083e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>2.15083e-05</iyy>
+          <iyy>2.10021e-05</iyy>
           <iyz>0</iyz>
-          <izz>1.35e-06</izz>
+          <izz>8.4375e-07</izz>
         </inertia>
       </inertial>
       <collision name='right_end_tip_collision'>

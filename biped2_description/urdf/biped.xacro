@@ -4,15 +4,17 @@
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931"/>
   <xacro:property name="space" value="0.0" />
-  <xacro:property name="mass_hip" value="2" />
-  <xacro:property name="width_hip" value="0.15" />
-  <xacro:property name="length_hip" value="0.3" />
-  <xacro:property name="height_hip" value="0.03" />
+  <xacro:property name="mass_hip" value="2.7" />
+  <!--xacro:property name="width_hip" value="0.15" /-->
+  <xacro:property name="width_hip" value="0.06" />
+  <xacro:property name="length_hip" value="0.165" />
+  <xacro:property name="height_hip" value="0.28" />
+  <xacro:property name="hip_leg_space" value="0.04" />
   <xacro:property name="pos_hip" value="0.5" />
 
   <xacro:property name="mass_abad" value="2" />
   <xacro:property name="width_abad" value="0.1" />
-  <xacro:property name="length_abad" value="0.3" />
+  <xacro:property name="length_abad" value="0.29" />
   <xacro:property name="height_abad" value="0.01" />
 
   <xacro:property name="mass_spring" value="0.5" />
@@ -148,8 +150,8 @@
       <mass value="${mass_hip}"/>
       <inertia
         ixx="${mass_hip * (width_hip*width_hip + height_hip*height_hip) / 12.0}" ixy="0.0" ixz="0.0"
-          iyy="${mass_hip * (height_hip*height_hip + width_hip*width_hip) / 12.0}" iyz="0.0"
-          izz="${mass_hip * (width_hip*width_hip + width_hip*width_hip) / 12.0}" />
+          iyy="${mass_hip * (height_hip*height_hip + length_hip*length_hip) / 12.0}" iyz="0.0"
+          izz="${mass_hip * (length_hip*length_hip + width_hip*width_hip) / 12.0}" />
     </inertial>
   </link>
 
@@ -167,13 +169,13 @@
 
   <link name="leg_left_abad">
     <collision>
-      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space+hip_leg_space} 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_abad} ${height_abad} ${width_abad}"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space+hip_leg_space} 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_abad} ${height_abad} ${width_abad}"/>
       </geometry>
@@ -181,7 +183,7 @@
     </visual>
 
     <inertial>
-      <origin xyz="0 ${width_hip/2+height_abad/2+space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${width_hip/2+height_abad/2+space+hip_leg_space} 0" rpy="0 0 0"/>
       <mass value="${mass_abad}"/>
       <inertia
         ixx="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" ixy="0.0" ixz="0.0"
@@ -227,7 +229,7 @@
   <joint name="left_spring_rear_joint" type="continuous">
     <parent link="leg_left_abad"/>
     <child link="leg_left_spring_rear"/>
-    <origin xyz="0 ${width_hip/2+height_abad*2+space*2} 0" rpy="0 0.196 0"/>
+    <origin xyz="0 ${width_hip/2+height_abad*2+space*2+hip_leg_space} 0" rpy="0 0.196 0"/>
     <axis xyz="0 1 0"/>
   </joint>
 
@@ -532,10 +534,10 @@
     <inertial>
       <origin xyz="0 0 0" rpy="0 ${PI/2} 0"/>
       <mass value="${mass_end}"/>
-      <inertia
+       <inertia
         ixx="${mass_end * (width_end*width_end + height_end*height_end) / 12.0}" ixy="0.0" ixz="0.0"
-          iyy="${mass_end * (height_end*height_end + width_end*width_end) / 12.0}" iyz="0.0"
-          izz="${mass_end * (width_end*width_end + width_end*width_end) / 12.0}" />
+          iyy="${mass_end * (height_end*height_end + length_end*length_end) / 12.0}" iyz="0.0"
+          izz="${mass_end * (width_end*width_end + length_end*length_end) / 12.0}" />
     </inertial>
   </link>
   <!--link name="left_end_tip">
@@ -579,13 +581,13 @@
 
   <link name="leg_right_abad">
     <collision>
-      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space-hip_leg_space} 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_abad} ${height_abad} ${width_abad}"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space-hip_leg_space} 0" rpy="0 0 0"/>
       <geometry>
         <box size="${length_abad} ${height_abad} ${width_abad}"/>
       </geometry>
@@ -593,7 +595,7 @@
     </visual>
 
     <inertial>
-      <origin xyz="0 ${-width_hip/2-height_abad/2-space} 0" rpy="0 0 0"/>
+      <origin xyz="0 ${-width_hip/2-height_abad/2-space-hip_leg_space} 0" rpy="0 0 0"/>
       <mass value="${mass_abad}"/>
       <inertia
         ixx="${mass_abad*(height_abad*height_abad+width_abad*width_abad)/12}" ixy="0.0" ixz="0.0"
@@ -639,7 +641,7 @@
   <joint name="right_spring_rear_joint" type="continuous">
     <parent link="leg_right_abad"/>
     <child link="leg_right_spring_rear"/>
-    <origin xyz="0 ${-width_hip/2-height_abad*2-space*2} 0" rpy="0 0.196 0"/>
+    <origin xyz="0 ${-width_hip/2-height_abad*2-space*2-hip_leg_space} 0" rpy="0 0.196 0"/>
     <axis xyz="0 1 0"/>
   </joint>
 
@@ -969,8 +971,8 @@
       <mass value="${mass_end}"/>
       <inertia
         ixx="${mass_end * (width_end*width_end + height_end*height_end) / 12.0}" ixy="0.0" ixz="0.0"
-          iyy="${mass_end * (height_end*height_end + width_end*width_end) / 12.0}" iyz="0.0"
-          izz="${mass_end * (width_end*width_end + width_end*width_end) / 12.0}" />
+          iyy="${mass_end * (height_end*height_end + length_end*length_end) / 12.0}" iyz="0.0"
+          izz="${mass_end * (width_end*width_end + length_end*length_end) / 12.0}" />
     </inertial>
   </link>
 
