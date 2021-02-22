@@ -4,11 +4,13 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
@@ -22,11 +24,13 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>

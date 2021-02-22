@@ -1,7 +1,7 @@
 <sdf version='1.6'>
   <model name='biped'>
     <link name='x-prism'>
-      <pose frame=''>0 0 0.5 0 -0 0</pose>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>1</mass>
@@ -42,7 +42,7 @@
       </axis>
     </joint>
     <link name='hip'>
-      <pose frame=''>0 0 0.5 0 -0 0</pose>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>2.7</mass>
@@ -107,7 +107,7 @@
       </axis>
     </joint>
     <link name='leg_left_abad'>
-      <pose frame=''>0 0 0.5 0 -0 0</pose>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0.075 0 0 -0 0</pose>
         <mass>2</mass>
@@ -169,7 +169,7 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
@@ -178,7 +178,7 @@
       </axis>
     </joint>
     <link name='leg_left_spring_rear'>
-      <pose frame=''>0 0.09 0.5 0 0.196 0</pose>
+      <pose frame=''>0 0.09 0.45 0 0.523599 0</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -234,10 +234,14 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -245,17 +249,17 @@
       </axis>
     </joint>
     <link name='leg_left_rear_top'>
-      <pose frame=''>0 0.118 0.5 3.14159 -0.196007 -3.14159</pose>
+      <pose frame=''>0 0.118 0.45 3.14159 -0.523606 -3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_rear_top_collision'>
@@ -316,17 +320,17 @@
       </axis>
     </joint>
     <link name='leg_left_rear_bot'>
-      <pose frame=''>-0.047131 0.118 0.262634 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-0.121002 0.118 0.240423 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_left_rear_bot_visual'>
@@ -368,17 +372,17 @@
       </axis>
     </joint>
     <link name='leg_left_front_bot'>
-      <pose frame=''>-0.015032 0.118 0.101806 0 0.1956 0</pose>
+      <pose frame=''>-0.039003 0.118 0.098394 0 0.523606 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_left_front_bot_visual'>
@@ -418,17 +422,17 @@
       </axis>
     </joint>
     <link name='leg_left_front_top'>
-      <pose frame=''>0.032002 0.1 0.339191 0 -0.1964 0</pose>
+      <pose frame=''>0.081999 0.1 0.307971 0 -0.523591 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.082 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000336033</ixx>
+          <ixx>0.000268827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000436033</iyy>
+          <iyy>0.000348827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_front_top_collision'>
@@ -489,7 +493,7 @@
       </axis>
     </joint>
     <link name='leg_left_spring_front'>
-      <pose frame=''>-1e-06 0.08 0.500038 3.14159 0.196393 3.14159</pose>
+      <pose frame=''>-0 0.08 0.45 3.14159 0.523584 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -560,17 +564,17 @@
       </axis>
     </joint>
     <link name='left_end_tip'>
-      <pose frame=''>0.000234 0.109 0.025314 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-3e-06 0.109 0.030844 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
-        <mass>0.025</mass>
+        <mass>0.02</mass>
         <inertia>
-          <ixx>2.15083e-05</ixx>
+          <ixx>1.72067e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>2.10021e-05</iyy>
+          <iyy>1.68017e-05</iyy>
           <iyz>0</iyz>
-          <izz>8.4375e-07</izz>
+          <izz>6.75e-07</izz>
         </inertia>
       </inertial>
       <collision name='left_end_tip_collision'>
@@ -627,7 +631,7 @@
       </axis>
     </joint>
     <link name='leg_right_abad'>
-      <pose frame=''>0 0 0.5 0 -0 0</pose>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 -0.075 0 0 -0 0</pose>
         <mass>2</mass>
@@ -689,7 +693,7 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
@@ -698,7 +702,7 @@
       </axis>
     </joint>
     <link name='leg_right_spring_rear'>
-      <pose frame=''>0 -0.09 0.5 0 0.196 0</pose>
+      <pose frame=''>0 -0.09 0.45 0 0.523599 0</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -734,10 +738,14 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -745,17 +753,17 @@
       </axis>
     </joint>
     <link name='leg_right_rear_top'>
-      <pose frame=''>0 -0.118 0.5 3.14159 -0.196007 -3.14159</pose>
+      <pose frame=''>0 -0.118 0.45 3.14159 -0.523606 -3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_rear_top_collision'>
@@ -816,17 +824,17 @@
       </axis>
     </joint>
     <link name='leg_right_rear_bot'>
-      <pose frame=''>-0.047131 -0.118 0.262634 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-0.121002 -0.118 0.240423 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_right_rear_bot_visual'>
@@ -868,17 +876,17 @@
       </axis>
     </joint>
     <link name='leg_right_front_bot'>
-      <pose frame=''>-0.015032 -0.118 0.101806 0 0.1956 0</pose>
+      <pose frame=''>-0.039003 -0.118 0.098394 0 0.523606 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000566033</ixx>
+          <ixx>0.000452827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000566033</iyy>
+          <iyy>0.000452827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_right_front_bot_visual'>
@@ -918,17 +926,17 @@
       </axis>
     </joint>
     <link name='leg_right_front_top'>
-      <pose frame=''>0.032002 -0.1 0.339191 0 -0.1964 0</pose>
+      <pose frame=''>0.081999 -0.1 0.307971 0 -0.523591 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.082 0 -0 0</pose>
-        <mass>0.1</mass>
+        <mass>0.08</mass>
         <inertia>
-          <ixx>0.000336033</ixx>
+          <ixx>0.000268827</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000436033</iyy>
+          <iyy>0.000348827</iyy>
           <iyz>0</iyz>
-          <izz>5.4e-06</izz>
+          <izz>4.32e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_front_top_collision'>
@@ -989,7 +997,7 @@
       </axis>
     </joint>
     <link name='leg_right_spring_front'>
-      <pose frame=''>-1e-06 -0.08 0.500038 3.14159 0.196393 3.14159</pose>
+      <pose frame=''>-0 -0.08 0.45 3.14159 0.523584 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
         <mass>0.5</mass>
@@ -1040,17 +1048,17 @@
       </axis>
     </joint>
     <link name='right_end_tip'>
-      <pose frame=''>0.000234 -0.109 0.025314 3.14159 0.196993 3.14159</pose>
+      <pose frame=''>-3e-06 -0.109 0.030844 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
-        <mass>0.025</mass>
+        <mass>0.02</mass>
         <inertia>
-          <ixx>2.15083e-05</ixx>
+          <ixx>1.72067e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>2.10021e-05</iyy>
+          <iyy>1.68017e-05</iyy>
           <iyz>0</iyz>
-          <izz>8.4375e-07</izz>
+          <izz>6.75e-07</izz>
         </inertia>
       </inertial>
       <collision name='right_end_tip_collision'>
@@ -1112,11 +1120,13 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
@@ -1130,11 +1140,13 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>35</effort>
+          <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
+          <damping>0</damping>
           <friction>0</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>

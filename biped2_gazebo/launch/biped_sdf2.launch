@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <launch>
-    <include file="$(find biped3_gazebo)/launch/biped_sdf.launch">
+    <include file="$(find biped2_gazebo)/launch/biped_sdf.launch">
       <arg name="robot_name" value="closed_chain"/>
       <arg name="x" value="0.0" />
       <arg name="y" value="0.0" />
       <arg name="z" value="0.0"/>
-      <arg name="sdf_robot_file" value="$(find biped3_description)/urdf/biped.sdf" />
+      <arg name="sdf_robot_file" value="$(find biped2_description)/urdf/biped.sdf" />
     </include>
  
     <!-- Load the URDF into the ROS Parameter Server -->
-    <param name="robot_description" command="$(find xacro)/xacro $(find biped3_description)/urdf/biped.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find biped2_description)/urdf/biped.xacro" />
 
     <!--param name="test_ball" command="$(find xacro)/xacro $(find biped3_description)/urdf/ball.xacro" /-->
 
@@ -21,7 +21,7 @@
       args="-sdf -x  0 -y 0 -z 0 -model ball -param ball_sdf"/-->
 
     <!-- biped control -->
-    <rosparam file="$(find biped3_control)/config/grp_biped_controller3.yaml" command="load" />
+    <rosparam file="$(find biped2_control)/config/grp_biped_controller2.yaml" command="load" />
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/biped2" args="group_joint_position_controller joint_state_controller" />
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">

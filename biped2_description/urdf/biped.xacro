@@ -10,7 +10,7 @@
   <xacro:property name="length_hip" value="0.165" />
   <xacro:property name="height_hip" value="0.28" />
   <xacro:property name="hip_leg_space" value="0.04" />
-  <xacro:property name="pos_hip" value="0.5" />
+  <xacro:property name="pos_hip" value="0.45" />
 
   <xacro:property name="mass_abad" value="2" />
   <xacro:property name="width_abad" value="0.1" />
@@ -21,8 +21,7 @@
   <xacro:property name="width_spring" value="0.1" />
   <xacro:property name="height_spring" value="0.01" />
 
-
-  <xacro:property name="mass_leg" value="0.1" />
+  <xacro:property name="mass_leg" value="0.08" />
   <xacro:property name="width_leg" value="0.018" />
   <xacro:property name="length_leg" value="0.018" />
   <xacro:property name="height_front_top" value="0.20" />
@@ -30,6 +29,15 @@
   <xacro:property name="height_rear_top" value="0.26" />
   <xacro:property name="height_rear_bot" value="0.26" />
   <xacro:property name="joint_effot" value="50.0"/>
+  <xacro:property name="joint_angle" value="${PI/6}"/>
+  <xacro:property name="joint_damping" value="0.7"/>
+  <xacro:property name="joint_friction" value="0"/>
+
+  <xacro:property name="motor_effort" value="35"/>
+  <xacro:property name="motor_vel" value="6.3"/>
+  <xacro:property name="soft_motor_vel" value="500"/>
+  <xacro:property name="motor_damping" value="0"/>
+  <xacro:property name="motor_friction" value="0"/>
 
   <xacro:property name="mass_tip" value="${mass_leg/4}" />
   <xacro:property name="radius_tip" value="${length_leg/2}" />
@@ -163,7 +171,7 @@
     <child link="leg_left_abad"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
     <limit effort="${joint_effot}" lower="-0.5236" upper="0.5236" velocity="10000.0"/>
   </joint>
 
@@ -226,12 +234,21 @@
     </inertial>
   </link-->
 
-  <joint name="left_spring_rear_joint" type="continuous">
+  <!--joint name="left_spring_rear_joint" type="continuous">
     <parent link="leg_left_abad"/>
     <child link="leg_left_spring_rear"/>
-    <origin xyz="0 ${width_hip/2+height_abad*2+space*2+hip_leg_space} 0" rpy="0 0.196 0"/>
+    <origin xyz="0 ${width_hip/2+height_abad*2+space*2+hip_leg_space} 0" rpy="0 ${joint_angle} 0"/>
     <axis xyz="0 1 0"/>
+  </joint-->
+  <joint name="left_spring_rear_joint" type="revolute">
+    <parent link="leg_left_abad"/>
+    <child link="leg_left_spring_rear"/>
+    <origin xyz="0 ${width_hip/2+height_abad*2+space*2+hip_leg_space} 0" rpy="0 ${joint_angle} 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="${motor_effort}" lower="-3.14" upper="3.14" velocity="${motor_vel}"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
   </joint>
+    <!--safety_controller k_velocity="${soft_motor_vel}" /-->
 
   <link name="leg_left_spring_rear">
     <collision>
@@ -275,7 +292,7 @@
     <child link="leg_left_rear_top"/>
     <origin xyz="0 ${height_abad+width_leg+space*2} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10000.0"/>
   </joint>
 
@@ -371,9 +388,9 @@
     <parent link="leg_left_rear_top"/>
     <child link="leg_left_rear_bot"/>
     <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
-    <origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 -0.393 0"/>
+    <origin xyz="0 ${-space} ${height_rear_top-width_leg}" rpy="0 ${-2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-3.0" upper="3.0" velocity="10000.0"/>
   </joint>
 
@@ -408,9 +425,9 @@
     <parent link="leg_left_rear_bot"/>
     <child link="leg_left_front_bot"/>
     <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
-    <origin xyz="0 ${space} ${height_front_top-width_leg*2}" rpy="0 -2.749 0"/>
+    <origin xyz="0 ${space} ${height_front_top-width_leg*2}" rpy="0 ${-PI+2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
   </joint>
 
   <!-- Left front bottom leg link -->
@@ -441,9 +458,9 @@
   <joint name="left_front_joint2" type="revolute">
     <parent link="leg_left_front_bot"/>
     <child link="leg_left_front_top"/>
-    <origin xyz="0 ${-width_leg-space} ${height_front_bot-width_leg}" rpy="0 -0.392 0"/>
+    <origin xyz="0 ${-width_leg-space} ${height_front_bot-width_leg}" rpy="0 ${-2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-3.0" upper="3.0" velocity="10000.0"/>
   </joint>
 
@@ -479,7 +496,7 @@
     <!--origin xyz="0 ${-height_abad*2-space*2} 0" rpy="0 3.1416 0"/-->
     <origin xyz="0 ${-height_abad*2-space*2} ${height_front_top-width_leg*2}" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10000.0"/>
   </joint>
 
@@ -575,7 +592,7 @@
     <child link="leg_right_abad"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
     <limit effort="${joint_effot}" lower="-0.5236" upper="0.5236" velocity="10000.0"/>
   </joint>
 
@@ -638,12 +655,22 @@
     </inertial>
   </link-->
 
-  <joint name="right_spring_rear_joint" type="continuous">
+  <!--joint name="right_spring_rear_joint" type="continuous">
     <parent link="leg_right_abad"/>
     <child link="leg_right_spring_rear"/>
-    <origin xyz="0 ${-width_hip/2-height_abad*2-space*2-hip_leg_space} 0" rpy="0 0.196 0"/>
+    <origin xyz="0 ${-width_hip/2-height_abad*2-space*2-hip_leg_space} 0" rpy="0 ${joint_angle} 0"/>
     <axis xyz="0 1 0"/>
+  </joint-->
+  <joint name="right_spring_rear_joint" type="revolute">
+    <parent link="leg_right_abad"/>
+    <child link="leg_right_spring_rear"/>
+    <origin xyz="0 ${-width_hip/2-height_abad*2-space*2-hip_leg_space} 0" rpy="0 ${joint_angle} 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="${motor_effort}" lower="-3.14" upper="3.14" velocity="${motor_vel}"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
   </joint>
+    <!--dynamics damping="0.7"/-->
+    <!--safety_controller k_velocity="${soft_motor_vel}" /-->
 
   <link name="leg_right_spring_rear">
     <collision>
@@ -687,7 +714,7 @@
     <child link="leg_right_rear_top"/>
     <origin xyz="0 ${-height_abad-width_leg-space*2} 0" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10000.0"/>
   </joint>
 
@@ -783,9 +810,9 @@
     <parent link="leg_right_rear_top"/>
     <child link="leg_right_rear_bot"/>
     <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
-    <origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -0.393 0"/>
+    <origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 ${-2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-3.0" upper="3.0" velocity="10000.0"/>
   </joint>
 
@@ -820,9 +847,9 @@
     <parent link="leg_right_rear_bot"/>
     <child link="leg_right_front_bot"/>
     <!--origin xyz="0 ${space} ${height_rear_top-width_leg}" rpy="0 -1.0472 0"/-->
-    <origin xyz="0 ${-space} ${height_front_top-width_leg*2}" rpy="0 -2.749 0"/>
+    <origin xyz="0 ${-space} ${height_front_top-width_leg*2}" rpy="0 ${-PI+2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
   </joint>
 
   <!-- right front bottom leg link -->
@@ -853,9 +880,9 @@
   <joint name="right_front_joint2" type="revolute">
     <parent link="leg_right_front_bot"/>
     <child link="leg_right_front_top"/>
-    <origin xyz="0 ${width_leg+space} ${height_front_bot-width_leg}" rpy="0 -0.392 0"/>
+    <origin xyz="0 ${width_leg+space} ${height_front_bot-width_leg}" rpy="0 ${-2*joint_angle} 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-3.0" upper="3.0" velocity="10000.0"/>
   </joint>
 
@@ -891,7 +918,7 @@
     <!--origin xyz="0 ${-height_abad*2-space*2} 0" rpy="0 3.1416 0"/-->
     <origin xyz="0 ${height_abad*2+space*2} ${height_front_top-width_leg*2}" rpy="0 3.1416 0"/>
     <axis xyz="0 1 0"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="${joint_damping}" friction="${joint_friction}"/>
     <limit effort="${joint_effot}" lower="-1.57" upper="1.57" velocity="10000.0"/>
   </joint>
 
@@ -976,18 +1003,35 @@
     </inertial>
   </link>
 
-  <joint name="left_spring_front_joint" type="continuous">
+  <!--joint name="left_spring_front_joint" type="continuous">
     <parent link="leg_left_spring_front"/>
     <child link="leg_left_abad"/>
-    <origin xyz="0 ${width_hip/2+height_abad+space} 0" rpy="0 -2.946 0"/>
+    <origin xyz="0 ${width_hip/2+height_abad+space} 0" rpy="0 ${joint_angle-PI} 0"/>
     <axis xyz="0 1 0"/>
   </joint>
   <joint name="right_spring_front_joint" type="continuous">
     <parent link="leg_right_spring_front"/>
     <child link="leg_right_abad"/>
-    <origin xyz="0 ${-width_hip/2-height_abad-space} 0" rpy="0 -2.946 0"/>
+    <origin xyz="0 ${-width_hip/2-height_abad-space} 0" rpy="0 ${joint_angle-PI} 0"/>
     <axis xyz="0 1 0"/>
+  </joint-->
+  <joint name="left_spring_front_joint" type="revolute">
+    <parent link="leg_left_spring_front"/>
+    <child link="leg_left_abad"/>
+    <origin xyz="0 ${width_hip/2+height_abad+space} 0" rpy="0 ${joint_angle-PI} 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="${motor_effort}" lower="-3.14" upper="3.14" velocity="${motor_vel}"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
   </joint>
+  <joint name="right_spring_front_joint" type="revolute">
+    <parent link="leg_right_spring_front"/>
+    <child link="leg_right_abad"/>
+    <origin xyz="0 ${-width_hip/2-height_abad-space} 0" rpy="0 ${joint_angle-PI} 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="${motor_effort}" lower="-3.14" upper="3.14" velocity="${motor_vel}"/>
+    <dynamics damping="${motor_damping}" friction="${motor_friction}"/>
+  </joint>
+    <!--safety_controller k_velocity="${soft_motor_vel}" /-->
 
   <!-- Define transmission -->
   <!-- Left -->

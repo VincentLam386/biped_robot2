@@ -128,7 +128,7 @@ void BipedHWSim::readSim(ros::Time time, ros::Duration period)
   //if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt - gravity);
   if (dt > 0.0) accel = rot.RotateVectorReverse((temp - velocity) / dt);
   velocity = temp;
-  std::cout << velocity << " ";
+  //std::cout << velocity << " ";
 
   // calculate angular velocity from delta quaternion
   // note: link->GetRelativeAngularVel() sometimes return nan?
