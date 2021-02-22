@@ -106,12 +106,12 @@
   </link>
   <joint name="planz" type="prismatic">
     <parent link="x-prism"/>
-    <child link="hip"/>
+    <child link="z-prism"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <limit effort="1000.0" lower="-10.0" upper="50.0" velocity="10.0"/>
   </joint>
-  <!--link name="z-prism">
+  <link name="z-prism">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -134,7 +134,7 @@
     <child link="hip"/>
     <axis xyz="0 1 0"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint-->
+  </joint>
   <!-- End planar joint -->
 
   <!-- Hip of the robot -->

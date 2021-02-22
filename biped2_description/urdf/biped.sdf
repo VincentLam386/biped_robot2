@@ -41,6 +41,47 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
+    <link name='z-prism'>
+      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000166667</iyy>
+          <iyz>0</iyz>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      <visual name='z-prism_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='planz' type='prismatic'>
+      <child>z-prism</child>
+      <parent>x-prism</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-10</lower>
+          <upper>50</upper>
+          <effort>1000</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
     <link name='hip'>
       <pose frame=''>0 0 0.45 0 -0 0</pose>
       <inertial>
@@ -88,16 +129,14 @@
       <gravity>1</gravity>
       <velocity_decay/>
     </link>
-    <joint name='planz' type='prismatic'>
+    <joint name='rev' type='revolute'>
       <child>hip</child>
-      <parent>x-prism</parent>
+      <parent>z-prism</parent>
       <axis>
-        <xyz>0 0 1</xyz>
+        <xyz>0 1 0</xyz>
         <limit>
-          <lower>-10</lower>
-          <upper>50</upper>
-          <effort>1000</effort>
-          <velocity>10</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
