@@ -16,19 +16,19 @@
 
   <link name="ground">
     <collision>
-      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0.0 0"/>
       <geometry>
         <box size="${len} ${len} ${h}" rpy="0 0 0"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0.0 0"/>
       <geometry>
         <box size="${len} ${len} ${h}" rpy="0 0 0"/>
       </geometry>
     </visual>
     <inertial>
-      <origin xyz="0 0 ${h_dep}" rpy="0 0 0"/>
+      <origin xyz="0 0 ${h_dep}" rpy="0 0.0 0"/>
       <mass value="${mass}"/>
       <inertia
         ixx="${i}" ixy="${i}" ixz="${i}"
