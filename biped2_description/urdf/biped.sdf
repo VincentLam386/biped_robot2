@@ -29,10 +29,10 @@
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
-          <lower>-10</lower>
-          <upper>50</upper>
+          <lower>-500</lower>
+          <upper>500</upper>
           <effort>1000</effort>
-          <velocity>10</velocity>
+          <velocity>100</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
@@ -70,10 +70,10 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <lower>-10</lower>
-          <upper>50</upper>
+          <lower>-500</lower>
+          <upper>500</upper>
           <effort>1000</effort>
-          <velocity>10</velocity>
+          <velocity>100</velocity>
         </limit>
         <dynamics>
           <spring_reference>0</spring_reference>
@@ -88,12 +88,12 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>2.7</mass>
         <inertia>
-          <ixx>0.01845</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0237656</iyy>
-          <iyz>0</iyz>
-          <izz>0.00693562</izz>
+          <ixx>0.01911</ixx>
+          <ixy>4.177e-05</ixy>
+          <ixz>-0.003356</ixz>
+          <iyy>0.0245</iyy>
+          <iyz>-0.0002039</iyz>
+          <izz>0.007141</izz>
         </inertia>
       </inertial>
       <collision name='hip_collision'>
@@ -275,7 +275,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
@@ -663,6 +663,8 @@
           <upper>1e+16</upper>
         </limit>
         <dynamics>
+          <damping>0</damping>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -779,7 +781,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
@@ -1147,6 +1149,8 @@
           <upper>1e+16</upper>
         </limit>
         <dynamics>
+          <damping>0</damping>
+          <friction>0.1</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -1161,7 +1165,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
@@ -1181,7 +1185,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>

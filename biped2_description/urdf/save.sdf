@@ -6,7 +6,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
@@ -26,7 +26,7 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>35</effort>
+          <effort>150</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>

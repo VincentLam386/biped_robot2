@@ -33,7 +33,7 @@
   <xacro:property name="joint_damping" value="0.7"/>
   <xacro:property name="joint_friction" value="0"/>
 
-  <xacro:property name="motor_effort" value="35"/>
+  <xacro:property name="motor_effort" value="150"/>
   <xacro:property name="motor_vel" value="6.3"/>
   <xacro:property name="soft_motor_vel" value="500"/>
   <xacro:property name="motor_damping" value="0"/>
@@ -74,8 +74,8 @@
   <!--joint name="prism" type="prismatic">
     <parent link="world"/>
     <child link="hip"/>
-    <origin xyz="0 0 ${-pos_hip-0.1}" rpy="0 0 0"/>
-    <axis xyz="1 0 0"/>
+    <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
     <limit effort="1000.0" lower="-0.5" upper="1.5" velocity="10.0"/>
   </joint-->
 
@@ -85,7 +85,7 @@
     <child link="x-prism"/>
     <origin xyz="0 0 ${pos_hip}" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
-    <limit effort="1000.0" lower="-10.0" upper="50.0" velocity="10.0"/>
+    <limit effort="1000.0" lower="-500.0" upper="500.0" velocity="100.0"/>
   </joint>
   <link name="x-prism">
     <visual>
@@ -109,7 +109,7 @@
     <child link="z-prism"/>
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
-    <limit effort="1000.0" lower="-10.0" upper="50.0" velocity="10.0"/>
+    <limit effort="1000.0" lower="-500.0" upper="500.0" velocity="100.0"/>
   </joint>
   <link name="z-prism">
     <visual>
@@ -157,9 +157,9 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="${mass_hip}"/>
       <inertia
-        ixx="${mass_hip * (width_hip*width_hip + height_hip*height_hip) / 12.0}" ixy="0.0" ixz="0.0"
-          iyy="${mass_hip * (height_hip*height_hip + length_hip*length_hip) / 12.0}" iyz="0.0"
-          izz="${mass_hip * (length_hip*length_hip + width_hip*width_hip) / 12.0}" />
+        ixx="0.01911" ixy="0.00004177" ixz="-0.003356"
+          iyy="0.0245" iyz="-0.0002039"
+          izz="0.007141" />
     </inertial>
   </link>
 
@@ -532,6 +532,7 @@
     <parent link="leg_left_rear_bot" />
     <child link="left_end_tip" />
     <axis xyz="0 1 0"/>
+    <dynamics damping="0" friction="0.1"/>
   </joint>
 
   <link name="left_end_tip">
@@ -954,6 +955,7 @@
     <parent link="leg_right_rear_bot" />
     <child link="right_end_tip" />
     <axis xyz="0 1 0"/>
+    <dynamics damping="0" friction="0.1"/>
   </joint>
 
   <!--link name="right_end_tip">
