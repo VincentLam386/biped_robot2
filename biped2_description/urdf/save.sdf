@@ -6,12 +6,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -26,12 +26,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>

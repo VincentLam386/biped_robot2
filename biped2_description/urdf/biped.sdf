@@ -1,7 +1,7 @@
 <sdf version='1.6'>
   <model name='biped'>
     <link name='x-prism'>
-      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <pose frame=''>0 0 0.43 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>1</mass>
@@ -42,7 +42,7 @@
       </axis>
     </joint>
     <link name='z-prism'>
-      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <pose frame=''>0 0 0.43 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>1</mass>
@@ -83,10 +83,10 @@
       </axis>
     </joint>
     <link name='hip'>
-      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <pose frame=''>0 0 0.43 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
-        <mass>2.7</mass>
+        <mass>4.321</mass>
         <inertia>
           <ixx>0.01911</ixx>
           <ixy>4.177e-05</ixy>
@@ -146,17 +146,17 @@
       </axis>
     </joint>
     <link name='leg_left_abad'>
-      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <pose frame=''>0 0 0.43 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0.075 0 0 -0 0</pose>
-        <mass>2</mass>
+        <mass>1.9082</mass>
         <inertia>
-          <ixx>0.00168333</ixx>
+          <ixx>0.00160607</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0156833</iyy>
+          <iyy>0.0149635</iyy>
           <iyz>0</iyz>
-          <izz>0.0140333</izz>
+          <izz>0.0133892</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_abad_collision'>
@@ -208,8 +208,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -217,17 +217,17 @@
       </axis>
     </joint>
     <link name='leg_left_spring_rear'>
-      <pose frame=''>0 0.09 0.45 0 0.523599 0</pose>
+      <pose frame=''>0 0.09 0.43 0 0.523599 0</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
-        <mass>0.5</mass>
+        <mass>0.303</mass>
         <inertia>
-          <ixx>0.000420833</ixx>
+          <ixx>0.000255025</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000833333</iyy>
+          <iyy>0.000505</iyy>
           <iyz>0</iyz>
-          <izz>0.000420833</izz>
+          <izz>0.000255025</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_spring_rear_collision'>
@@ -275,12 +275,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -288,17 +288,17 @@
       </axis>
     </joint>
     <link name='leg_left_rear_top'>
-      <pose frame=''>0 0.118 0.45 3.14159 -0.523606 -3.14159</pose>
+      <pose frame=''>0 0.118 0.43 3.14159 -0.523606 -3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.145</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.000820748</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.000820748</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>7.83e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_rear_top_collision'>
@@ -350,8 +350,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -359,17 +359,17 @@
       </axis>
     </joint>
     <link name='leg_left_rear_bot'>
-      <pose frame=''>-0.121002 0.118 0.240423 3.14159 0.523591 3.14159</pose>
+      <pose frame=''>-0.121002 0.118 0.220423 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.091</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.00051509</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.00051509</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>4.914e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_left_rear_bot_visual'>
@@ -402,8 +402,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -411,17 +411,17 @@
       </axis>
     </joint>
     <link name='leg_left_front_bot'>
-      <pose frame=''>-0.039003 0.118 0.098394 0 0.523606 0</pose>
+      <pose frame=''>-0.039003 0.118 0.078394 0 0.523606 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.091</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.00051509</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.00051509</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>4.914e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_left_front_bot_visual'>
@@ -452,8 +452,8 @@
           <upper>1e+16</upper>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -461,17 +461,17 @@
       </axis>
     </joint>
     <link name='leg_left_front_top'>
-      <pose frame=''>0.081999 0.1 0.307971 0 -0.523591 0</pose>
+      <pose frame=''>0.081999 0.1 0.287971 0 -0.523591 0</pose>
       <inertial>
         <pose frame=''>0 0.009 0.082 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.145</mass>
         <inertia>
-          <ixx>0.000268827</ixx>
+          <ixx>0.000487248</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000348827</iyy>
+          <iyy>0.000632248</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>7.83e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_front_top_collision'>
@@ -523,8 +523,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -532,17 +532,17 @@
       </axis>
     </joint>
     <link name='leg_left_spring_front'>
-      <pose frame=''>-0 0.08 0.45 3.14159 0.523584 3.14159</pose>
+      <pose frame=''>-0 0.08 0.43 3.14159 0.523584 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.005 0 0 -0 0</pose>
-        <mass>0.5</mass>
+        <mass>0.303</mass>
         <inertia>
-          <ixx>0.000420833</ixx>
+          <ixx>0.000255025</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000833333</iyy>
+          <iyy>0.000505</iyy>
           <iyz>0</iyz>
-          <izz>0.000420833</izz>
+          <izz>0.000255025</izz>
         </inertia>
       </inertial>
       <collision name='leg_left_spring_front_collision'>
@@ -594,8 +594,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -603,17 +603,17 @@
       </axis>
     </joint>
     <link name='left_end_tip'>
-      <pose frame=''>-3e-06 0.109 0.030844 3.14159 0.523591 3.14159</pose>
+      <pose frame=''>-3e-06 0.109 0.010844 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
-        <mass>0.02</mass>
+        <mass>0.0466</mass>
         <inertia>
-          <ixx>1.72067e-05</ixx>
+          <ixx>4.00915e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1.68017e-05</iyy>
+          <iyy>3.91479e-05</iyy>
           <iyz>0</iyz>
-          <izz>6.75e-07</izz>
+          <izz>1.57275e-06</izz>
         </inertia>
       </inertial>
       <collision name='left_end_tip_collision'>
@@ -672,17 +672,17 @@
       </axis>
     </joint>
     <link name='leg_right_abad'>
-      <pose frame=''>0 0 0.45 0 -0 0</pose>
+      <pose frame=''>0 0 0.43 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 -0.075 0 0 -0 0</pose>
-        <mass>2</mass>
+        <mass>1.9082</mass>
         <inertia>
-          <ixx>0.00168333</ixx>
+          <ixx>0.00160607</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0156833</iyy>
+          <iyy>0.0149635</iyy>
           <iyz>0</iyz>
-          <izz>0.0140333</izz>
+          <izz>0.0133892</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_abad_collision'>
@@ -734,8 +734,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -743,17 +743,17 @@
       </axis>
     </joint>
     <link name='leg_right_spring_rear'>
-      <pose frame=''>0 -0.09 0.45 0 0.523599 0</pose>
+      <pose frame=''>0 -0.09 0.43 0 0.523599 0</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
-        <mass>0.5</mass>
+        <mass>0.303</mass>
         <inertia>
-          <ixx>0.000420833</ixx>
+          <ixx>0.000255025</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000833333</iyy>
+          <iyy>0.000505</iyy>
           <iyz>0</iyz>
-          <izz>0.000420833</izz>
+          <izz>0.000255025</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_spring_rear_collision'>
@@ -781,12 +781,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -794,17 +794,17 @@
       </axis>
     </joint>
     <link name='leg_right_rear_top'>
-      <pose frame=''>0 -0.118 0.45 3.14159 -0.523606 -3.14159</pose>
+      <pose frame=''>0 -0.118 0.43 3.14159 -0.523606 -3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.145</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.000820748</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.000820748</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>7.83e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_rear_top_collision'>
@@ -856,8 +856,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -865,17 +865,17 @@
       </axis>
     </joint>
     <link name='leg_right_rear_bot'>
-      <pose frame=''>-0.121002 -0.118 0.240423 3.14159 0.523591 3.14159</pose>
+      <pose frame=''>-0.121002 -0.118 0.220423 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.091</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.00051509</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.00051509</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>4.914e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_right_rear_bot_visual'>
@@ -908,8 +908,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -917,17 +917,17 @@
       </axis>
     </joint>
     <link name='leg_right_front_bot'>
-      <pose frame=''>-0.039003 -0.118 0.098394 0 0.523606 0</pose>
+      <pose frame=''>-0.039003 -0.118 0.078394 0 0.523606 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.112 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.091</mass>
         <inertia>
-          <ixx>0.000452827</ixx>
+          <ixx>0.00051509</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000452827</iyy>
+          <iyy>0.00051509</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>4.914e-06</izz>
         </inertia>
       </inertial>
       <visual name='leg_right_front_bot_visual'>
@@ -958,8 +958,8 @@
           <upper>1e+16</upper>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -967,17 +967,17 @@
       </axis>
     </joint>
     <link name='leg_right_front_top'>
-      <pose frame=''>0.081999 -0.1 0.307971 0 -0.523591 0</pose>
+      <pose frame=''>0.081999 -0.1 0.287971 0 -0.523591 0</pose>
       <inertial>
         <pose frame=''>0 -0.009 0.082 0 -0 0</pose>
-        <mass>0.08</mass>
+        <mass>0.145</mass>
         <inertia>
-          <ixx>0.000268827</ixx>
+          <ixx>0.000487248</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000348827</iyy>
+          <iyy>0.000632248</iyy>
           <iyz>0</iyz>
-          <izz>4.32e-06</izz>
+          <izz>7.83e-06</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_front_top_collision'>
@@ -1029,8 +1029,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -1038,17 +1038,17 @@
       </axis>
     </joint>
     <link name='leg_right_spring_front'>
-      <pose frame=''>-0 -0.08 0.45 3.14159 0.523584 3.14159</pose>
+      <pose frame=''>-0 -0.08 0.43 3.14159 0.523584 3.14159</pose>
       <inertial>
         <pose frame=''>0 -0.005 0 0 -0 0</pose>
-        <mass>0.5</mass>
+        <mass>0.303</mass>
         <inertia>
-          <ixx>0.000420833</ixx>
+          <ixx>0.000255025</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000833333</iyy>
+          <iyy>0.000505</iyy>
           <iyz>0</iyz>
-          <izz>0.000420833</izz>
+          <izz>0.000255025</izz>
         </inertia>
       </inertial>
       <collision name='leg_right_spring_front_collision'>
@@ -1080,8 +1080,8 @@
           <velocity>10000</velocity>
         </limit>
         <dynamics>
-          <damping>0.7</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -1089,17 +1089,17 @@
       </axis>
     </joint>
     <link name='right_end_tip'>
-      <pose frame=''>-3e-06 -0.109 0.030844 3.14159 0.523591 3.14159</pose>
+      <pose frame=''>-3e-06 -0.109 0.010844 3.14159 0.523591 3.14159</pose>
       <inertial>
         <pose frame=''>0 0 0 3.14159 1.57079 3.14159</pose>
-        <mass>0.02</mass>
+        <mass>0.0466</mass>
         <inertia>
-          <ixx>1.72067e-05</ixx>
+          <ixx>4.00915e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1.68017e-05</iyy>
+          <iyy>3.91479e-05</iyy>
           <iyz>0</iyz>
-          <izz>6.75e-07</izz>
+          <izz>1.57275e-06</izz>
         </inertia>
       </inertial>
       <collision name='right_end_tip_collision'>
@@ -1165,12 +1165,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -1185,12 +1185,12 @@
         <limit>
           <lower>-3.14</lower>
           <upper>3.14</upper>
-          <effort>150</effort>
+          <effort>35</effort>
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
