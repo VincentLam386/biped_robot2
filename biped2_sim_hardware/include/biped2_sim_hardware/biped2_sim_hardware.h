@@ -138,6 +138,9 @@ protected:
   /// \brief allow specifying constant xyz and rpy offsets
   ignition::math::Pose3<double> offset_;
 
+  ros::Time curTime;
+  ros::Time lastTime;
+
 };
 
 typedef boost::shared_ptr<BipedHWSim> BipedHWSimPtr;

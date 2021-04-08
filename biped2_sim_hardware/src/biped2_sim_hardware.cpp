@@ -80,6 +80,8 @@ bool BipedHWSim::initSim(
   const urdf::Model *const urdf_model,
   std::vector<transmission_interface::TransmissionInfo> transmissions)
 {
+  lastTime = ros::Time::now();
+  curTime = ros::Time::now();
   // Call parent init (dealing with joint interfaces)
   if (!DefaultRobotHWSim::initSim(robot_namespace, model_nh, parent_model, urdf_model, transmissions)){
     return false;
@@ -108,6 +110,10 @@ void BipedHWSim::readSim(ros::Time time, ros::Duration period)
   DefaultRobotHWSim::readSim(time, period);
   
   double dt = period.toSec();
+
+  curTime = ros::Time::now();
+  if((curTime-lastTime).toSec() >= 0.001){
+  //std::cout << curTime.toSec() << " ";
 
    // Get Pose/Orientation
   ignition::math::Pose3<double> pose = imu_link_->WorldCoGPose();
@@ -151,6 +157,9 @@ void BipedHWSim::readSim(ros::Time time, ros::Duration period)
   imu_linear_acceleration[0] = accel.X();
   imu_linear_acceleration[1] = accel.Y();
   imu_linear_acceleration[2] = accel.Z();
+
+  lastTime = curTime;
+  } // if 
 
 }
 
