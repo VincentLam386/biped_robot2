@@ -24,33 +24,50 @@
   <!-- Spring -->
   <gazebo>
     <plugin name="left_knee_joint_torsional_spring" filename="libgazebo_joint_torsional_spring.so">
-      <kx>160</kx>
-      <set_point>-0.19635</set_point>
+      <kx>143.2394</kx>
+      <set_point>0.0</set_point>
       <joint>left_front_joint</joint>
     </plugin>
   </gazebo>
 
   <gazebo>
     <plugin name="left_knee_joint_torsional_spring2" filename="libgazebo_joint_torsional_spring.so">
-      <kx>160</kx>
-      <set_point>0.19635</set_point>
+      <kx>154.6986</kx>
+      <set_point>0.0</set_point>
       <joint>left_rear_joint</joint>
     </plugin>
   </gazebo>
 
   <gazebo>
     <plugin name="right_knee_joint_torsional_spring" filename="libgazebo_joint_torsional_spring.so">
-      <kx>160</kx>
-      <set_point>-0.19635</set_point>
+      <kx>143.2394</kx>
+      <set_point>0.0</set_point>
       <joint>right_front_joint</joint>
     </plugin>
   </gazebo>
 
   <gazebo>
     <plugin name="right_knee_joint_torsional_spring2" filename="libgazebo_joint_torsional_spring.so">
-      <kx>160</kx>
-      <set_point>0.19635</set_point>
+      <kx>154.6986</kx>
+      <set_point>0.0</set_point>
       <joint>right_rear_joint</joint>
+    </plugin>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="left_end_joint_torsional_spring" filename="libgazebo_joint_torsional_spring.so">
+      <kx>0.01</kx>
+      <set_point>0.0</set_point>
+      <joint>left_end_joint</joint>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="right_end_joint_torsional_spring" filename="libgazebo_joint_torsional_spring.so">
+      <kx>0.01</kx>
+      <set_point>0.0</set_point>
+      <joint>right_end_joint</joint>
     </plugin>
   </gazebo>
 
@@ -77,18 +94,32 @@
     <springReference>0.19635</springReference>
   </gazebo-->
 
+  <gazebo reference="leg_left_spring_front">
+    <selfCollide>true</selfCollide>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="leg_left_spring_rear">
+    <selfCollide>true</selfCollide>   
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
   <gazebo reference="leg_left_front_top">
     <selfCollide>true</selfCollide>
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+    <material>Gazebo/Yellow</material>
   </gazebo>
 
   <gazebo reference="leg_left_rear_top">
     <selfCollide>true</selfCollide>   
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+    <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="leg_left_front_bot">
@@ -121,18 +152,32 @@
     <material>Gazebo/Black</material>
   </gazebo>
 
+  <gazebo reference="leg_right_spring_front">
+    <selfCollide>true</selfCollide>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="leg_right_spring_rear">
+    <selfCollide>true</selfCollide>   
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
   <gazebo reference="leg_right_front_top">
     <selfCollide>true</selfCollide>
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+    <material>Gazebo/Yellow</material>
   </gazebo>
 
   <gazebo reference="leg_right_rear_top">
     <selfCollide>true</selfCollide>   
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/White</material>
+    <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="leg_right_front_bot">

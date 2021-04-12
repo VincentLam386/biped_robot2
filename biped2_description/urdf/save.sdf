@@ -10,8 +10,8 @@
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -30,8 +30,8 @@
           <velocity>6.3</velocity>
         </limit>
         <dynamics>
-          <damping>0</damping>
-          <friction>0</friction>
+          <damping>0.003</damping>
+          <friction>0.001</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
